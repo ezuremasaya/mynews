@@ -30,3 +30,24 @@ Route::get('admin/profile/create', 'Admin\ProfileController@add');
 
 // admin/profile/editにアクセスしたら、ProfileContorollerのAction editに割り当てるよう設定
 Route::get('admin/profile/edit', 'Admin\ProfileController@edit');
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+// ログインしていない状態で管理画面にアクセスしたとき、ログイン画面にリダイレクトするよう設定
+Route::group(['prefix' => 'admin' , 'middleware' => 'auth'], function() {
+    Route::get('news/create', 'Admin\NewsController@add');
+    Route::get('profile/create', 'Admin\ProfileController@add');
+    Route::get('profile/edit', 'Admin\ProfileController@add');
+});
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
