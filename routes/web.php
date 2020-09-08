@@ -36,9 +36,15 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 // ログインしていない状態で管理画面にアクセスしたとき、ログイン画面にリダイレクトするよう設定
 Route::group(['prefix' => 'admin' , 'middleware' => 'auth'], function() {
+    // GETリクエストの場合はadd Actionを呼び出している
+    // 通常のページ表示には「get」を受け取る
     Route::get('news/create', 'Admin\NewsController@add');
-    Route::get('profile/create', 'Admin\ProfileController@add');
-    Route::get('profile/edit', 'Admin\ProfileController@add');
+    Route::post('profile/create', 'Admin\ProfileController@create');
+    Route::post('profile/edit', 'Admin\ProfileController@update');
+
+    // POSTリクエストの場合はcreate Actionを呼び出している
+    // フォームを送信した時に受け取るには「post」で指定する
+    Route::post('news/create', 'Admin\NewsController@create'); # 追記
 });
 Auth::routes();
 
