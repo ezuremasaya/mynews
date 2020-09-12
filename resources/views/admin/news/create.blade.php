@@ -1,10 +1,6 @@
-{{-- layouts/admin.blade.phpを読み込む --}}
 @extends('layouts.admin')
-
-{{-- admin.blade.phpの@yield('title')に'ニュースの新規作成'を埋め込む --}}
 @section('title', 'ニュースの新規作成')
 
-{{-- admin.blade.phpの@yield('content')に以下のタグを埋め込む --}}
 @section('content')
 <div class="container">
     <div class="row">
@@ -12,15 +8,9 @@
             <h2>ニュース新規作成</h2>
             <form action="{{ action('Admin\NewsController@create') }}" method="post" enctype="multipart/form-data">
 
-            <!-- $errors：validateで弾かれた内容を記憶する配列を意味する -->
-            <!-- countメソッド：配列の個数を返すもの -->
-            <!-- エラーがなければ$errorsは「null」を返す、すなわち「0」を返す -->
                 @if (count($errors) > 0)
                 <ul>
-                    <!-- foreach：配列の数だけループする構文 -->
-                    <!-- $errorsの中身の数に応じてループし、その中身を$eに代入する -->
                     @foreach($errors->all() as $e)
-                    <!-- 代入された中身を表示している -->
                     <li>{{ $e }}</li>
                     @endforeach
                 </ul>
