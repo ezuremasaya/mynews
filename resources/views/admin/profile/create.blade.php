@@ -1,11 +1,6 @@
-{{-- layouts/profile.blade.phpを読み込む --}}
-@extends('layouts.profile')
-
-
-{{-- profile.blade.phpの@yield('title')に'プロフィールの新規作成'を埋め込む --}}
+@extends('layouts.admin')
 @section('title', 'プロフィールの新規作成')
 
-{{-- profile.blade.phpの@yield('content')に以下のタグを埋め込む --}}
 @section('content')
 <div class="container">
     <div class="row">
@@ -21,17 +16,19 @@
                 @endif
                 <div class="form-group row">
                     <!-- 氏名 -->
-                    <label class="col-md-2" for="title">氏名</label>
+                    <label class="col-md-2" for="name">氏名</label>
                     <div class="col-md-10">
-                        <input type="text" class="form-control" name="title" value="{{ old('title') }}">
+                        <input type="text" class="form-control" name="name" value="{{ old('name') }}">
                     </div>
                 </div>
                 <!-- 性別 -->
                 <div class="form-group row">
                     <label class="col-md-2" for="gender">性別</label>
                     <div class="col-md-10">
-                        <input type="radio" name="gender" value="{{ old('gender') }}" checked class="mb-3">男性 <br>
-                        <input type="radio" name="gender" value="{{ old('gender') }}">女性
+                        <input type="radio" name="gender" id="male" value="male {{ old('gender') == 'male' ? 'checked' : '' }}" checked class="mb-3">
+                        <label for="male">男性</label><br>
+                        <input type="radio" name="gender" id="female" value="female {{ old('gender') == 'female' ? 'checked' : '' }}">
+                        <label for="female">女性</label>
                     </div>
                 </div>
                 <!-- 趣味 -->

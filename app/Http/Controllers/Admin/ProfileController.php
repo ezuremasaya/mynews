@@ -47,4 +47,18 @@ class ProfileController extends Controller
     {
         return redirect('admin/profile/edit');
     }
+
+    public function index(Request $request)
+    {
+        // $cond_nameに$requestの中にあるcond_nameの値を代入
+        $cond_name = $request->cond_name;
+        if ($cond_name != '') {
+            // 検索されたら検索結果を取得する
+            $posts = Profile::where('name', $cond_name)->get();
+        } else {
+            // それ以外はすべての自己紹介を取得する
+            $posts = Profile::all();
+        }
+        return view('admin.profile.index', ['posts' => $posts, 'cond_name' => $cond_name]);
+    }
 }
