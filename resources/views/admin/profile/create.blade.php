@@ -25,10 +25,8 @@
                 <div class="form-group row">
                     <label class="col-md-2" for="gender">性別</label>
                     <div class="col-md-10">
-                        <input type="radio" name="gender" id="male" value="male {{ old('gender') == 'male' ? 'checked' : '' }}" checked class="mb-3">
-                        <label for="male">男性</label><br>
-                        <input type="radio" name="gender" id="female" value="female {{ old('gender') == 'female' ? 'checked' : '' }}">
-                        <label for="female">女性</label>
+                        <input type="radio" name="gender" value="男性" @if(old('gender') === '男性') checked="chaecked" @endif class="mb-3">男性<br>
+                        <input type="radio" name="gender" value="女性" @if(old('gender') === '女性') checked="chaecked" @endif>女性
                     </div>
                 </div>
                 <!-- 趣味 -->
