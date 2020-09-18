@@ -48,6 +48,21 @@
           </div>
         </div>
       </form>
+      <!-- 以下を追加 -->
+      <div class="row mt-5">
+        <div class="col-md-4 mx-auto">
+          <h2>編集履歴</h2>
+          <ul class="list-group">
+            <!-- 編集履歴があるかを確認 -->
+            @if ($news_form->histories != NULL)
+            <!-- 編集履歴があれば、履歴を１つずつ表示 -->
+            @foreach ($news_form->histories as $history)
+            <li class="list-group-item">{{ $history->edited_at }}</li>
+            @endforeach
+            @endif
+          </ul>
+        </div>
+      </div>
     </div>
   </div>
 </div>

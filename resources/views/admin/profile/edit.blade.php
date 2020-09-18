@@ -25,8 +25,8 @@
                 <div class="form-group row">
                     <label class="col-md-2" for="gender">性別</label>
                     <div class="col-md-10">
-                        <input type="radio" name="gender" checked class="mb-3" value="男性"{{$profile_form->gender == '男性' ? 'checked' : ''}}>男性<br>
-                        <input type="radio" name="gender" value="女性"{{$profile_form->gender == '女性' ? 'checked' : ''}}>女性
+                        <input type="radio" name="gender" checked class="mb-3" value="男性" {{$profile_form->gender == '男性' ? 'checked' : ''}}>男性<br>
+                        <input type="radio" name="gender" value="女性" {{$profile_form->gender == '女性' ? 'checked' : ''}}>女性
                     </div>
                 </div>
                 <!-- 趣味 -->
@@ -52,6 +52,19 @@
                     </div>
                 </div>
             </form>
+            <!-- 以下を追加 -->
+            <div class="row mt-5">
+                <div class="col-md-4 mx-auto">
+                    <h2>編集履歴</h2>
+                    <ul class="list-group">
+                        @if ($profile_form->profile_histories != NULL)
+                        @foreach ($profile_form->profile_histories as $history)
+                        <li class="list-group-item">{{ $history->edited_at }}</li>
+                        @endforeach
+                        @endif
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
 </div>

@@ -8,6 +8,10 @@ use App\Http\Controllers\Controller;
 // 以下を追記することでNews Modelが扱えるようになる
 use App\News;
 
+// 以下を追加
+use App\History;
+use Carbon\Carbon;
+
 class NewsController extends Controller
 {
     public function add()
@@ -107,7 +111,16 @@ class NewsController extends Controller
         // $news->save();
         $news->fill($news_form)->save();
 
-        return redirect('admin/news');
+        // 以下を追加
+        $history = new History;
+        $history->news_id = $news->id;
+        // Carbon：日付操作を行うライブラリ
+        // now：現在の時間を取得する
+        // 取得した現在時刻を、Historyモデルのedited_atとして記録
+        $history->edited_at = Carbon::now();
+        $history->save();
+
+        return redirect('admin/news/');
     }
 
     // 以下を追記（データの削除）

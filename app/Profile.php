@@ -18,4 +18,10 @@ class Profile extends Model
         // 自己紹介
         'introduction' => 'required',
     );
+
+    // リレーションで以下を追加
+    public function profile_histories()
+    {
+        return $this->hasMany('App\ProfileHistory');
+    }
 }
