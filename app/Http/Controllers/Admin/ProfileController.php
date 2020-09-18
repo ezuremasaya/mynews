@@ -14,7 +14,6 @@ class ProfileController extends Controller
     public function add()
     {
         // view('admin.profile.create')：admin/profile ディレクトリ直下の create.blade.php のファイルを呼び出す
-        // つまり、resources/views/admin/profile ディレクトリ配下に「create.blade.php」ファイルを作成する必要がある
         return view('admin.profile.create');
     }
 
@@ -36,16 +35,37 @@ class ProfileController extends Controller
         return redirect('admin/profile/create');
     }
 
-    public function edit()
+    // データの編集
+    public function edit(Request $request)
     {
+        // Profile Modelからデータを取得
+        $profile = Profile::find($request->id);
+        // 中身が空であれば、エラーレスポンスを返す
+        if (empty($profile)) {
+            abort(404);
+        }
+
         // view('admin.edit.create')：admin/profile ディレクトリ配下にある「edit.blade.php」のファイルを呼び出す
-        // つまり、resources/views/admin/profile ディレクトリ配下に「edit.blade.php」ファイルを作成する必要がある
-        return view('admin.profile.edit');
+        // Profileインスタンスが、edit.blade.phpのフォームのvalueに表示される
+        return view('admin.profile.edit', ['profile_form' => $profile]);
     }
 
-    public function update()
+    // データの更新
+    public function update(Request $request)
     {
-        return redirect('admin/profile/edit');
+        // バリデーションをかける
+        $this->validate($request, Profile::$rules);
+
+        // Profile Modelからデータを取得
+        $profile = Profile::find($request->id);
+        // フォームデータを格納
+        $profile_form = $request->all();
+        unset($profile_form['_token']);
+
+        // 該当データを上書き保存
+        $profile->fill($profile_form)->save();
+
+        return redirect('admin/profile');
     }
 
     public function index(Request $request)
@@ -60,5 +80,14 @@ class ProfileController extends Controller
             $posts = Profile::all();
         }
         return view('admin.profile.index', ['posts' => $posts, 'cond_name' => $cond_name]);
+    }
+
+    // データの削除
+    public function delete(Request $request) {
+        // Profile Modelを取得
+        $profile = Profile::find($request->id);
+        // 削除する
+        $profile->delete();
+        return redirect('admin/profile');
     }
 }

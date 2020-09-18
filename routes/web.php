@@ -40,7 +40,6 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     // 通常のページ表示には「get」を受け取る
     Route::get('news/create', 'Admin\NewsController@add');
     Route::post('profile/create', 'Admin\ProfileController@create');
-    Route::post('profile/edit', 'Admin\ProfileController@update');
 
     // 以下を追加
     Route::post('news/create', 'Admin\NewsController@create');
@@ -49,6 +48,16 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     // 以下を課題で追加
     Route::get('profile/create', 'Admin\ProfileController@add');
     Route::get('profile', 'Admin\ProfileController@index');
+
+    // 以下を追記
+    Route::get('news/edit', 'Admin\NewsController@edit');
+    Route::post('news/edit', 'Admin\NewsController@update');
+    Route::get('news/delete', 'Admin\NewsController@delete');
+
+    // 以下を課題で追記
+    Route::get('profile/edit', 'Admin\ProfileController@edit');
+    Route::post('profile/edit', 'Admin\ProfileController@update');
+    Route::get('profile/delete', 'Admin\ProfileController@delete');
 
     // POSTリクエストの場合はcreate Actionを呼び出している
     // フォームを送信した時に受け取るには「post」で指定する

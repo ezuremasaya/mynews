@@ -27,7 +27,7 @@
   </div>
   <!-- プロフィールのリスト一覧 -->
   <div class="row">
-    <div class="list-news col-md-12 mx-auto">
+    <div class="admin-profile col-md-12 mx-auto">
       <div class="row">
         <table class="table table-dark">
           <thead>
@@ -47,6 +47,15 @@
               <td>{{ str_limit($profile->gender, 4) }}</td>
               <td>{{ str_limit($profile->hobby, 100) }}</td>
               <td>{{ str_limit($profile->introduction, 200) }}</td>
+              <!-- 以下を追加 -->
+              <td>
+                <div>
+                  <a href="{{ action('Admin\ProfileController@edit', ['id' => $profile->id]) }}">編集</a>
+                </div>
+                <div>
+                  <a href="{{ action('Admin\ProfileController@delete', ['id' => $profile->id]) }}">削除</a>
+                </div>
+              </td>
             </tr>
             @endforeach
           </tbody>
