@@ -120,7 +120,7 @@ class NewsController extends Controller
         $history->edited_at = Carbon::now();
         $history->save();
 
-        return redirect('admin/news/');
+        return redirect('admin/profile/');
     }
 
     // 以下を追記（データの削除）

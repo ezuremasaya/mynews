@@ -74,3 +74,6 @@ Route::get('/home', 'HomeController@index')->name('home');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+// 以下を追加
+Route::get('/', 'NewsController@index');
